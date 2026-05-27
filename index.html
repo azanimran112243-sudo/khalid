@@ -176,15 +176,11 @@ nav {
 .hero-headline {
   font-family: var(--ff-title);
   font-size: clamp(4.5rem, 12vw, 10rem);
-  line-height: 0.9;      /* Keeps your preferred tight spacing exactly as it is */
+  line-height: 0.8;          /* 1. Increased from 0.9 to prevent top clipping */
   letter-spacing: 0.02em;
   color: var(--bone);
-  
-  /* THIS IS THE FIX: */
-  padding-top: 2.5rem;   /* Pushes the entire headline safely down so the top line can't clip */
-  
-  opacity: 0; 
-  transform: translateY(30px);
+  padding-top: 1.5rem;       /* 2. Safety padding so the browser doesn't choke */
+  opacity: 0; transform: translateY(30px);
   animation: fadeUp 1s 0.4s var(--ease-sharp) forwards;
 }
 .hero-headline em {
@@ -859,7 +855,7 @@ footer {
     </div>
 
     <h1 class="hero-headline">
-      I AM THE<br>
+     <br> I AM THE
       <em>SWORD</em><br>
       THAT NEVER BENDS
     </h1>
