@@ -176,10 +176,15 @@ nav {
 .hero-headline {
   font-family: var(--ff-title);
   font-size: clamp(4.5rem, 12vw, 10rem);
-  line-height: 0.9;
+  line-height: 0.9;      /* Keeps your preferred tight spacing exactly as it is */
   letter-spacing: 0.02em;
   color: var(--bone);
-  opacity: 0; transform: translateY(30px);
+  
+  /* THIS IS THE FIX: */
+  padding-top: 2.5rem;   /* Pushes the entire headline safely down so the top line can't clip */
+  
+  opacity: 0; 
+  transform: translateY(30px);
   animation: fadeUp 1s 0.4s var(--ease-sharp) forwards;
 }
 .hero-headline em {
