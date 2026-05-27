@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAIFULLAH — THE UNDEFEATED</title>
+<link rel="icon" type="kk.png" href="kk.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink:       #050505; /* Deep void black */
+  --bone:      #ffffff; /* Pure white headers */
+  --ash:       #888888; /* Mid-tone charcoal text */
+  --mist:      #cccccc; /* High visibility light grey text */
+  --blood:     #e11d48; /* High-intensity scarlet red for numbers and accents */
+  --rust:      #9f1239; /* Deep crimson burgundy for hovers */
+  --slate:     #111111; /* Dark carbon black for secondary surfaces */
+  --glass:     rgba(5,5,5,0.8);
+  --glass-b:   rgba(225,29,72,0.05);
+  --line:      rgba(255,255,255,0.06);
+  --line-hot:  rgba(225,29,72,0.6);
+  
+  --ff-title:  'Bebas Neue', sans-serif;
+  --ff-body:   'Cormorant Garamond', serif;
+  --ff-mono:   'Share Tech Mono', monospace;
+  --ease-sharp: cubic-bezier(0.16,1,0.3,1);
+  --ease-snap:  cubic-bezier(0.77,0,0.175,1);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink);
+  color: var(--bone);
+  font-family: var(--ff-body);
+  font-size: 18px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--blood); color: var(--bone); }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--blood); }
+
+/* ── NOISE OVERLAY (global) ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.45;
+  mix-blend-mode: overlay;
+}
+
+/* ══════════════════════════════════
+   NAVIGATION
+══════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem;
+  height: 64px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(10,11,13,0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-brand {
+  display: flex; flex-direction: column; gap: 1px;
+  text-decoration: none;
+}
+.nav-brand .wordmark {
+  font-family: var(--ff-title);
+  font-size: 1.35rem;
+  letter-spacing: 0.25em;
+  color: var(--bone);
+  line-height: 1;
+}
+.nav-brand .tagline {
+  font-family: var(--ff-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  color: var(--ash);
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex; gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ash);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.2s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--bone);
+  transition: width 0.35s var(--ease-sharp);
+}
+.nav-links a:hover { color: var(--bone); }
+.nav-links a:hover::after { width: 100%; }
+
+/* mobile nav toggle */
+.nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+.nav-toggle span { display: block; width: 28px; height: 1px; background: var(--bone); transition: transform 0.3s, opacity 0.3s; }
+
+/* ══════════════════════════════════
+   HERO SECTION
+══════════════════════════════════ */
+#hero {
+  position: relative;
+  height: 100svh; min-height: 600px;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 3rem 5rem;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+}
+.hero-bg picture, .hero-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+  will-change: transform;
+}
+
+
+/* cinematic vignette */
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to top,  rgba(10,11,13,0.96) 0%, rgba(10,11,13,0.55) 40%, transparent 70%),
+    linear-gradient(to right, rgba(10,11,13,0.45) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 30%, transparent 30%, rgba(10,11,13,0.6) 100%);
+}
+.hero-rule {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 3;
+  height: 64px;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 900px;
+}
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.2rem;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.9s 0.2s var(--ease-sharp) forwards;
+}
+.eyebrow-line {
+  display: block; width: 40px; height: 1px; background: var(--blood);
+}
+.eyebrow-text {
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+.hero-headline {
+  font-family: var(--ff-title);
+  font-size: clamp(4.5rem, 12vw, 10rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  color: var(--bone);
+  opacity: 0; transform: translateY(30px);
+  animation: fadeUp 1s 0.4s var(--ease-sharp) forwards;
+}
+.hero-headline em {
+  font-style: normal;
+  -webkit-text-stroke: 1px var(--bone);
+  color: transparent;
+}
+.hero-sub {
+  margin-top: 1.8rem;
+  font-family: var(--ff-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  color: var(--mist);
+  max-width: 520px;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.9s 0.65s var(--ease-sharp) forwards;
+}
+.hero-cta-row {
+  display: flex; align-items: center; gap: 2rem;
+  margin-top: 2.8rem;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.9s 0.85s var(--ease-sharp) forwards;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  padding: 0.85rem 2.2rem;
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone);
+  border: 1px solid var(--bone);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.35s var(--ease-snap);
+}
+.btn-primary::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--bone);
+  transform: translateX(-101%);
+  transition: transform 0.4s var(--ease-snap);
+}
+.btn-primary:hover { color: var(--ink); }
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary span { position: relative; z-index: 1; }
+.btn-primary .arrow {
+  display: inline-block;
+  transition: transform 0.3s var(--ease-sharp);
+}
+.btn-primary:hover .arrow { transform: translateX(6px); }
+
+.btn-ghost {
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ash);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { color: var(--bone); border-color: var(--bone); }
+
+/* hero scroll indicator */
+.hero-scroll {
+  position: absolute; right: 3rem; bottom: 5rem; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+  opacity: 0; animation: fadeIn 1s 1.4s forwards;
+}
+.scroll-label {
+  font-family: var(--ff-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ash);
+  writing-mode: vertical-rl;
+}
+.scroll-line {
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom, var(--ash), transparent);
+  animation: scrollPulse 2.5s ease-in-out infinite;
+}
+
+/* ── DIVIDER ── */
+.section-divider {
+  display: flex; align-items: center; gap: 0;
+  padding: 4rem 3rem 0;
+  overflow: hidden;
+}
+.divider-label {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blood);
+  white-space: nowrap;
+  padding-right: 1.5rem;
+}
+.divider-track {
+  flex: 1; height: 1px; background: var(--line);
+}
+
+/* ══════════════════════════════════
+   SHOWCASE SECTION
+══════════════════════════════════ */
+#showcase {
+  position: relative;
+  min-height: 100svh;
+  padding: 5rem 3rem 7rem;
+  overflow: hidden;
+}
+.showcase-bg {
+  position: absolute; inset: 0; z-index: 0;
+}
+.showcase-bg picture, .showcase-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center center;
+  display: block;
+}
+.showcase-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(10,11,13,0.97) 0%, rgba(10,11,13,0.78) 30%, rgba(10,11,13,0.82) 70%, rgba(10,11,13,0.97) 100%);
+}
+.showcase-inner { position: relative; z-index: 2; }
+
+/* Section header */
+.section-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 2rem; margin-bottom: 4rem;
+}
+.section-title-group {}
+.section-number {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  color: var(--blood);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.section-title {
+  font-family: var(--ff-title);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 0.92;
+  letter-spacing: 0.03em;
+  color: var(--bone);
+}
+.section-desc {
+  max-width: 320px;
+  font-family: var(--ff-body);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--ash);
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+/* GRID */
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.card {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.35s;
+}
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--blood), transparent);
+  transform: scaleX(0);
+  transition: transform 0.5s var(--ease-sharp);
+  transform-origin: left;
+}
+.card:hover { background: rgba(10,11,13,0.88); }
+.card:hover::before { transform: scaleX(1); }
+
+/* card spans */
+.card-wide   { grid-column: span 8; }
+.card-narrow { grid-column: span 4; }
+.card-third  { grid-column: span 4; }
+.card-half   { grid-column: span 6; }
+.card-full   { grid-column: span 12; }
+
+.card-index {
+  font-family: var(--ff-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: var(--blood);
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+}
+.card-title {
+  font-family: var(--ff-title);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--bone);
+  margin-bottom: 1rem;
+}
+.card-body {
+  font-family: var(--ff-body);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--ash);
+  font-style: italic;
+}
+.card-stat {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  display: flex; align-items: baseline; gap: 0.6rem;
+}
+.stat-value {
+  font-family: var(--ff-title);
+  font-size: 3rem;
+  color: var(--bone);
+  line-height: 1;
+}
+.stat-label {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  color: var(--blood);
+  text-transform: uppercase;
+}
+
+/* feature list inside card */
+.feature-list {
+  list-style: none;
+  margin-top: 1.5rem;
+  display: flex; flex-direction: column; gap: 0.8rem;
+}
+.feature-list li {
+  display: flex; align-items: center; gap: 0.8rem;
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--mist);
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--line);
+}
+.feature-list li::before {
+  content: '—';
+  color: var(--blood);
+  flex-shrink: 0;
+}
+
+/* quote card */
+.card-quote {
+  display: flex; flex-direction: column; justify-content: flex-end;
+  min-height: 280px;
+}
+.card-quote blockquote {
+  font-family: var(--ff-body);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--bone);
+  margin-bottom: 1.5rem;
+}
+.card-quote cite {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blood);
+  font-style: normal;
+}
+
+/* chronicle card - full width */
+.chronicle-card {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr;
+  gap: 0;
+  padding: 0;
+}
+.chronicle-item {
+  padding: 2.5rem;
+  transition: background 0.3s;
+}
+.chronicle-item:hover { background: rgba(139,26,26,0.06); }
+.chronicle-sep {
+  background: var(--line);
+  align-self: stretch;
+}
+.chronicle-year {
+  font-family: var(--ff-title);
+  font-size: 3.5rem;
+  color: var(--blood);
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+.chronicle-event {
+  font-family: var(--ff-body);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--ash);
+  line-height: 1.7;
+}
+.chronicle-title {
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-bottom: 0.5rem;
+}
+
+/* ══════════════════════════════════
+   EPITAPH BAND
+══════════════════════════════════ */
+.epitaph-band {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 3rem 3rem;
+  background: var(--slate);
+  overflow: hidden;
+}
+.epitaph-track {
+  display: flex;
+  animation: marquee 28s linear infinite;
+  white-space: nowrap;
+}
+.epitaph-track:hover { animation-play-state: paused; }
+.epitaph-item {
+  display: flex; align-items: center; gap: 2.5rem;
+  padding-right: 2.5rem;
+  flex-shrink: 0;
+}
+.epitaph-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--blood);
+  flex-shrink: 0;
+}
+.epitaph-text {
+  font-family: var(--ff-title);
+  font-size: 1.2rem;
+  letter-spacing: 0.12em;
+  color: var(--ash);
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════
+   PIONEERS SECTION
+══════════════════════════════════ */
+#pioneers {
+  padding: 7rem 3rem;
+  border-top: 1px solid var(--line);
+}
+.pioneers-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+  align-items: end;
+}
+.pioneers-eyebrow {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--blood);
+  margin-bottom: 1rem;
+}
+.pioneers-title {
+  font-family: var(--ff-title);
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 0.9;
+  color: var(--bone);
+}
+.pioneers-intro {
+  font-family: var(--ff-body);
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.75;
+  color: var(--ash);
+  align-self: end;
+}
+.pioneers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--line);
+}
+.pioneer-card {
+  padding: 2.8rem 2.5rem;
+  border-right: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.35s;
+}
+.pioneer-card:last-child { border-right: none; }
+.pioneer-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blood), transparent);
+  transform: scaleX(0);
+  transition: transform 0.5s var(--ease-sharp);
+}
+.pioneer-card:hover { background: rgba(139,26,26,0.05); }
+.pioneer-card:hover::after { transform: scaleX(1); }
+
+.pioneer-name {
+  font-family: var(--ff-title);
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  color: var(--bone);
+  margin-bottom: 0.3rem;
+}
+.pioneer-dates {
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--blood);
+  margin-bottom: 1.2rem;
+}
+.pioneer-epitaph {
+  font-family: var(--ff-body);
+  font-size: 0.85rem;
+  font-style: italic;
+  line-height: 1.8;
+  color: var(--ash);
+}
+.pioneer-rule {
+  width: 30px; height: 1px;
+  background: var(--blood);
+  margin: 1.5rem 0;
+}
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 5rem 3rem 3rem;
+  background: var(--ink);
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 2.5rem;
+}
+.footer-brand .wordmark {
+  font-family: var(--ff-title);
+  font-size: 2rem;
+  letter-spacing: 0.2em;
+  color: var(--bone);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.footer-brand .tagline {
+  font-family: var(--ff-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  color: var(--ash);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+.footer-brand p {
+  font-family: var(--ff-body);
+  font-size: 0.85rem;
+  font-style: italic;
+  line-height: 1.8;
+  color: var(--ash);
+  max-width: 280px;
+}
+.footer-col-title {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blood);
+  margin-bottom: 1.4rem;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+.footer-links a {
+  font-family: var(--ff-body);
+  font-size: 0.88rem;
+  color: var(--ash);
+  text-decoration: none;
+  transition: color 0.2s;
+  display: inline-block;
+  position: relative;
+}
+.footer-links a::before {
+  content: '—';
+  color: var(--blood);
+  margin-right: 0.5rem;
+  opacity: 0;
+  transform: translateX(-8px);
+  display: inline-block;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.footer-links a:hover { color: var(--bone); }
+.footer-links a:hover::before { opacity: 1; transform: translateX(0); }
+
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.footer-copy {
+  font-family: var(--ff-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  color: var(--ash);
+  text-transform: uppercase;
+}
+.social-row {
+  display: flex; gap: 1.5rem; align-items: center;
+}
+.social-link {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ash);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+  padding-bottom: 1px;
+}
+.social-link::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--bone);
+  transition: width 0.3s var(--ease-sharp);
+}
+.social-link:hover { color: var(--bone); }
+.social-link:hover::after { width: 100%; }
+
+/* ══════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════ */
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(1); opacity: 0.5; }
+  50%       { transform: scaleY(1.3); opacity: 1; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Scroll-reveal */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.85s var(--ease-sharp), transform 0.85s var(--ease-sharp);
+}
+.reveal.visible {
+  opacity: 1; transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ══════════════════════════════════
+   MOBILE NAV
+══════════════════════════════════ */
+@media (max-width: 768px) {
+  nav { padding: 0 1.5rem; }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    position: fixed; top: 64px; left: 0; right: 0;
+    flex-direction: column; gap: 0;
+    background: rgba(10,11,13,0.97);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: clip-path 0.45s var(--ease-sharp);
+  }
+  .nav-links.open {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .nav-links li { border-bottom: 1px solid var(--line); }
+  .nav-links a { display: block; padding: 1.2rem 1.5rem; font-size: 0.8rem; }
+
+  #hero { padding: 0 1.5rem 4rem; }
+  .hero-scroll { display: none; }
+  .hero-headline { font-size: clamp(3.5rem, 18vw, 6rem); }
+
+  .section-divider { padding: 3rem 1.5rem 0; }
+  #showcase { padding: 4rem 1.5rem 5rem; }
+
+  .section-header { flex-direction: column; gap: 1.5rem; }
+  .section-desc { padding-top: 1rem; max-width: 100%; }
+
+  .showcase-grid { grid-template-columns: 1fr; }
+  .card-wide, .card-narrow, .card-third, .card-half, .card-full { grid-column: span 1; }
+  .chronicle-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .chronicle-sep { display: none; }
+
+  .pioneers-header { grid-template-columns: 1fr; gap: 1.5rem; }
+  .pioneers-grid { grid-template-columns: 1fr; }
+  .pioneer-card { border-right: none; border-bottom: 1px solid var(--line); }
+  .pioneer-card:last-child { border-bottom: none; }
+
+  #pioneers { padding: 5rem 1.5rem; }
+
+  footer { padding: 4rem 1.5rem 2.5rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .footer-top { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav aria-label="Main navigation">
+  <a href="#" class="nav-brand" aria-label="Saifullah home">
+    <span class="wordmark">KHALID BIN WALID</span>
+    <span class="tagline">The Drawn Sword of Allah</span>
+  </a>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="nav-links" id="navLinks" role="list">
+    <li><a href="#hero">The Oath</a></li>
+    <li><a href="#showcase">Campaigns</a></li>
+    <li><a href="#pioneers">Commanders</a></li>
+    <li><a href="#footer">Legacy</a></li>
+  </ul>
+</nav>
+
+<section id="hero" aria-label="Hero">
+  <div class="hero-bg" role="presentation">
+    <picture>
+      <source media="(max-width: 768px)" srcset="kk.png">
+      <img src="kb.png" alt="The unbroken tactical genius of Khalid bin Walid" fetchpriority="high">
+    </picture>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-line" aria-hidden="true"></span>
+      <span class="eyebrow-text"> undefeated tactical mastery &nbsp;·&nbsp; 100+ battles</span>
+    </div>
+
+    <h1 class="hero-headline">
+      I AM THE<br>
+      <em>SWORD</em><br>
+      THAT NEVER BENDS
+    </h1>
+
+    <p class="hero-sub">
+      "IF YOU WERE IN THE CLOUDS, ALLAH WOULD HAVE RAISED US TO YOU OR LOWERED YOU TO US." <br>
+      THE ABSOLUTE DESTRUCTION OF EMPIRES BY THE GREATEST GENERAL TO EVER LIVE.
+    </p>
+
+    <div class="hero-cta-row">
+      <a href="#showcase" class="btn-primary" aria-label="Analyze the campaigns">
+        <span>Study the Conquests</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="#pioneers" class="btn-ghost">View the Vanguard</a>
+    </div>
+  </div>
+
+  <aside class="hero-scroll" aria-hidden="true">
+    <span class="scroll-label">Scroll</span>
+    <span class="scroll-line"></span>
+  </aside>
+</section>
+
+<div class="epitaph-band" aria-hidden="true">
+  <div class="epitaph-track" id="marqueeTrack">
+    <div class="epitaph-item"><span class="epitaph-dot"></span><span class="epitaph-text">Undefeated In 100+ Engagements</span></div>
+    <div class="epitaph-item"><span class="epitaph-dot"></span><span class="epitaph-text">Crusher of the Byzantine Empire</span></div>
+    <div class="epitaph-item"><span class="epitaph-dot"></span><span class="epitaph-text">Scourge of the Sasanian Dynasty</span></div>
+    <div class="epitaph-item"><span class="epitaph-dot"></span><span class="epitaph-text">Saifullah — Sword of Allah</span></div>
+    <div class="epitaph-item"><span class="epitaph-dot"></span><span class="epitaph-text">Master of Psychological Warfare</span></div>
+    <div class="epitaph-item"><span class="epitaph-dot"></span><span class="epitaph-text">They Wanted War, He Brought Doom</span></div>
+    <div class="epitaph-item"><span class="epitaph-dot"></span><span class="epitaph-text">Undefeated In 100+ Engagements</span></div>
+    <div class="epitaph-item"><span class="epitaph-dot"></span><span class="epitaph-text">Crusher of the Byzantine Empire</span></div>
+    <div class="epitaph-item"><span class="epitaph-dot"></span><span class="epitaph-text">Scourge of the Sasanian Dynasty</span></div>
+    <div class="epitaph-item"><span class="epitaph-dot"></span><span class="epitaph-text">Saifullah — Sword of Allah</span></div>
+    <div class="epitaph-item"><span class="epitaph-dot"></span><span class="epitaph-text">Master of Psychological Warfare</span></div>
+    <div class="epitaph-item"><span class="epitaph-dot"></span><span class="epitaph-text">They Wanted War, He Brought Doom</span></div>
+  </div>
+</div>
+
+<div class="section-divider reveal">
+  <span class="divider-label">§ II — The Tactical Records</span>
+  <span class="divider-track"></span>
+</div>
+
+<section id="showcase" aria-labelledby="showcase-title">
+  <div class="showcase-bg" role="presentation">
+    <picture>
+      <source media="(max-width: 768px)" srcset="bat.png">
+      <img src="bat.png" alt="The merciless maneuvers of the Rashidun cavalry" loading="lazy">
+    </picture>
+  </div>
+
+  <div class="showcase-inner">
+    <header class="section-header reveal">
+      <div class="section-title-group">
+        <p class="section-number">§ 002 — Military Masterclasses</p>
+        <h2 class="section-title" id="showcase-title">THE<br>IRON<br>STRATEGY</h2>
+      </div>
+      <p class="section-desc">
+        Two massive global superpowers tried to hold onto their borders. Khalid stepped onto the battlefield and dismantled them both simultaneously with blinding speed.
+      </p>
+    </header>
+
+    <div class="showcase-grid">
+
+      <article class="card card-wide reveal">
+        <p class="card-index">001 — The Record</p>
+        <h3 class="card-title">ZERO LOSSES. PURE DOMINANCE.</h3>
+        <p class="card-body">
+          While Roman and Persian generals relied on massive numbers and heavy armor, Khalid weaponized the brutal desert itself. He executed forced marches through uncrossable terrain, launched devastating flanking maneuvers, and broke empires before they even realized they were surrounded.
+        </p>
+        <div class="card-stat">
+          <span class="stat-value">100+</span>
+          <span class="stat-label">Battles Won</span>
+        </div>
+      </article>
+
+      <article class="card card-narrow reveal reveal-delay-1">
+        <p class="card-index">002 — Scale</p>
+        <h3 class="card-title">DUAL<br>FRONT</h3>
+        <p class="card-body">Obliterating the Romans and the Persians at the exact same time.</p>
+        <div class="card-stat">
+          <span class="stat-value">0</span>
+          <span class="stat-label">Defeats Suffered</span>
+        </div>
+      </article>
+
+      <article class="card card-third card-quote reveal reveal-delay-2">
+        <blockquote>
+          "You are looking at a race of people who love death as much as you love life."
+        </blockquote>
+        <cite>— Letter to the Persian Empire</cite>
+      </article>
+
+      <article class="card card-half reveal reveal-delay-1">
+        <p class="card-index">003 — Signature Wins</p>
+        <h3 class="card-title">TACTICAL ANNIHILATIONS</h3>
+        <ul class="feature-list">
+          <li>Battle of Yarmouk — Outnumbered 4-to-1, Shattered Rome</li>
+          <li>Battle of Walaja — Perfect Double Envelopment Executed</li>
+          <li>The Desert March — 5 Days Through Deathly Wilderness</li>
+          <li>Conquest of Damascus — Flawless Siege Mechanics</li>
+          <li>Battle of Mu'tah — Broke 9 Swords Keeping the Line Alive</li>
+        </ul>
+      </article>
+
+      <article class="card card-half reveal reveal-delay-2">
+        <p class="card-index">004 — Psychological Warfare</p>
+        <h3 class="card-title">BREAKING MINDSETS</h3>
+        <p class="card-body">
+          Khalid didn't just fight army corps; he utterly shattered his opponents' will to win. His elite mobile strike units, the Mobile Guard, moved with such terrifying velocity that enemy commanders swore he was commanding a supernatural army.
+        </p>
+        <div class="card-stat">
+          <span class="stat-value">∞</span>
+          <span class="stat-label">Tactical Immortality</span>
+        </div>
+      </article>
+
+      <article class="card card-full chronicle-card reveal">
+        <div class="chronicle-item">
+          <div class="chronicle-year">629</div>
+          <div class="chronicle-title">Mu'tah Unleashed</div>
+          <p class="chronicle-event">Outnumbered 100,000 to 3,000 against the Byzantines. Khalid takes control, shatters nine swords in fierce combat, and pulls off a brilliant tactical retreat that leaves the Romans stunned.</p>
+        </div>
+        <div class="chronicle-sep" aria-hidden="true"></div>
+        <div class="chronicle-item">
+          <div class="chronicle-year">633</div>
+          <div class="chronicle-title">Walaja Envelopment</div>
+          <p class="chronicle-event">Khalid pulls off Hannibal’s legendary tactic—the double envelopment—against a massively superior Persian army, locking them in an inescapable trap of total destruction.</p>
+        </div>
+        <div class="chronicle-sep" aria-hidden="true"></div>
+        <div class="chronicle-item">
+          <div class="chronicle-year">636</div>
+          <div class="chronicle-title">Yarmouk Finale</div>
+          <p class="chronicle-event">The absolute collapse of Byzantine rule in the Levant. Using rapid cavalry shifts, Khalid completely isolates and annihilates a Roman force four times his size.</p>
+        </div>
+      </article>
+
+    </div></div>
+</section>
+
+<div class="section-divider reveal">
+  <span class="divider-label">§ III — Tactical Assets</span>
+  <span class="divider-track"></span>
+</div>
+
+<section id="pioneers" aria-labelledby="pioneers-title">
+  <div class="pioneers-header">
+    <div>
+      <p class="pioneers-eyebrow reveal">§ 003 — Weapons of the Rashidun</p>
+      <h2 class="pioneers-title reveal reveal-delay-1" id="pioneers-title">THE<br>WAR<br>DOCTRINE</h2>
+    </div>
+    <p class="pioneers-intro reveal reveal-delay-2">
+      Khalid didn't win by accident. He rebuilt ancient warfare from the ground up, forging a fast, ruthless, and highly adaptive army that could out-maneuver any empire on Earth.
+    </p>
+  </div>
+
+  <div class="pioneers-grid">
+    <article class="pioneer-card reveal">
+      <div class="pioneer-name">MOBILE GUARD</div>
+      <div class="pioneer-dates">Light Cavalry &nbsp;·&nbsp; Elite Strike Unit</div>
+      <div class="pioneer-rule" aria-hidden="true"></div>
+      <p class="pioneer-epitaph">
+        An elite fast-response cavalry division under Khalid's direct control. They specialized in sudden, crushing flank attacks, shifting across wide fronts with terrifying speed to turn stalemates into slaughters.
+      </p>
+    </article>
+
+    <article class="pioneer-card reveal reveal-delay-1">
+      <div class="pioneer-name">DESERT LOGISTICS</div>
+      <div class="pioneer-dates">Camel Transport &nbsp;·&nbsp; Terrain Mastery</div>
+      <div class="pioneer-rule" aria-hidden="true"></div>
+      <p class="pioneer-epitaph">
+        While other empires viewed the harsh desert as a fatal barrier, Khalid used it as a highway. He forced camels to store water for his cavalry, allowing his troops to bypass defenses and surprise enemies from behind uncrossable sand dunes.
+      </p>
+    </article>
+
+    <article class="pioneer-card reveal reveal-delay-2">
+      <div class="pioneer-name">PSYCHOLOGICAL WAR</div>
+      <div class="pioneer-dates">Champion Duels &nbsp;·&nbsp; Terror tactics</div>
+      <div class="pioneer-rule" aria-hidden="true"></div>
+      <p class="pioneer-epitaph">
+        Before battles even began, Khalid systematically hunted down and killed enemy generals in open, single-combat duels. He broke the enemy's chain of command and destroyed their morale before a single arrow flew.
+      </p>
+    </article>
+  </div>
+</section>
+
+<footer id="footer" aria-label="Site footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="wordmark">SAIFULLAH</span>
+      <span class="tagline">The Legend Resides · Est. 585</span>
+      <p>A tribute to the absolute pinnacle of strategic military execution. Empires crumble, kings die, but the sword of Allah remains completely unbroken.</p>
+    </div>
+
+    <div>
+      <p class="footer-col-title">Campaigns</p>
+      <ul class="footer-links">
+        <li><a href="#hero">The Oath</a></li>
+        <li><a href="#showcase">Persian Front</a></li>
+        <li><a href="#pioneers">Byzantine Line</a></li>
+        <li><a href="#">Levant Map</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="footer-col-title">Tactics</p>
+      <ul class="footer-links">
+        <li><a href="#">Double Envelopment</a></li>
+        <li><a href="#">Cavalry Flanking</a></li>
+        <li><a href="#">Psychological Dominance</a></li>
+        <li><a href="#">Desert Navigation</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="footer-col-title">History</p>
+      <ul class="footer-links">
+        <li><a href="#">Battle Records</a></li>
+        <li><a href="#">Rashidun Era</a></li>
+        <li><a href="#">The Unbeaten Run</a></li>
+        <li><a href="#">Military Academies</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Saifullah Military History Vault &nbsp;·&nbsp; No losses recorded &nbsp;·&nbsp; Est. 585</p>
+    <nav class="social-row" aria-label="Social links">
+      <a href="#" class="social-link">Tactics</a>
+      <a href="#" class="social-link">Main</a>
+      <a href="#" class="social-link">History</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+/* ── NAV TOGGLE ── */
+const navToggle = document.getElementById('navToggle');
+const navLinks  = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', open);
+  const spans = navToggle.querySelectorAll('span');
+  if (open) {
+    spans[0].style.transform = 'translateY(6px) rotate(45deg)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'translateY(-6px) rotate(-45deg)';
+  } else {
+    spans[0].style.transform = '';
+    spans[1].style.opacity = '';
+    spans[2].style.transform = '';
+  }
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    const spans = navToggle.querySelectorAll('span');
+    spans[0].style.transform = '';
+    spans[1].style.opacity = '';
+    spans[2].style.transform = '';
+  });
+});
+
+/* ── SCROLL REVEAL ── */
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+reveals.forEach(el => io.observe(el));
+
+/* ── OPTIMIZED NAV SHRINK ── */
+const nav = document.querySelector('nav');
+let navTicking = false;
+
+window.addEventListener('scroll', () => {
+  if (!navTicking) {
+    window.requestAnimationFrame(() => {
+      if (window.scrollY > 80) {
+        nav.style.height = '52px';
+        nav.style.borderBottomColor = 'rgba(232,226,214,0.08)';
+      } else {
+        nav.style.height = '';
+        nav.style.borderBottomColor = '';
+      }
+      navTicking = false;
+    });
+    navTicking = true;
+  }
+}, { passive: true });
+
+/* ── OPTIMIZED PARALLAX WITH REQUESTANIMATIONFRAME ── */
+const heroImg = document.querySelector('#hero .hero-bg img');
+let scrollY = 0;
+let ticking = false;
+
+if (heroImg && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  window.addEventListener('scroll', () => {
+    scrollY = window.scrollY;
+
+    // If a frame update isn't already scheduled, schedule one
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        if (scrollY < window.innerHeight) {
+          heroImg.style.transform = `translateY(${scrollY * 0.28}px)`;
+        }
+        ticking = false; // Reset the lock once the frame is painted
+      });
+
+      ticking = true; // Lock further execution until this frame paints
+    }
+  }, { passive: true });
+}
+
+/* ── CARD TILT EFFECT (desktop only) ── */
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transform = `perspective(800px) rotateX(${-y * 3}deg) rotateY(${x * 3}deg) translateZ(4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.transition = 'transform 0.6s cubic-bezier(0.16,1,0.3,1), background 0.35s';
+    });
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'transform 0.1s linear, background 0.35s';
+    });
+  });
+}
+</script>
+</body>
+</html>
