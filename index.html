@@ -32,9 +32,7 @@
 }
 html { scroll-behavior: smooth; }
 body {
-  zoom: 75%; /* Controls scaling in Chrome, Edge, and Safari */
-    -moz-transform: scale(0.75); /* Firefox fix */
-    -moz-transform-origin: top center; /* Keeps it aligned */
+  
   background: var(--ink);
   color: var(--bone);
   font-family: var(--ff-body);
@@ -178,7 +176,7 @@ nav {
 }
 .hero-headline {
   font-family: var(--ff-title);
-  font-size: clamp(4.5rem, 12vw, 10rem);
+  font-size: clamp(3.5rem, 10vw, 8rem);
   line-height: 0.8;          /* 1. Increased from 0.9 to prevent top clipping */
   letter-spacing: 0.02em;
   color: var(--bone);
@@ -858,7 +856,7 @@ footer {
     </div>
 
     <h1 class="hero-headline">
-     <br> I AM THE
+     <br> I AM THE<br>
       <em>SWORD</em><br>
       THAT NEVER BENDS
     </h1>
